@@ -1,6 +1,6 @@
 <script setup>
 // @ts-nocheck
-import { ref } from 'vue'
+import { ref,computed } from 'vue'
 
 const header = ref('Shopping List App')
 const editing = ref(false)
@@ -24,6 +24,7 @@ const items = ref([
      highPriority: true
    }
 ])
+
 const newItem = ref("")
 const newItemHighPriority = ref(false)
 const saveItem = ()=>{
@@ -36,6 +37,9 @@ const saveItem = ()=>{
   newItem.value = ""
   newItemHighPriority.value = ""
 }
+const characterCount = computed(()=>{
+  return newItem.value.length
+})
 const doEdit = (e)=>{
   editing.value = e
   newItem.value = ""
@@ -67,6 +71,7 @@ const togglePurchased = (item)=>{
  			type="text" 
       placeholder="Add an item"
     >
+    {{ characterCount }} / 5
     <label>
       <input type="checkbox" v-model="newItemHighPriority"> 
       High Priority
