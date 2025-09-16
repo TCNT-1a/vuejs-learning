@@ -1,7 +1,11 @@
 <script setup>
 // @ts-nocheck
-import { ref,computed } from 'vue'
-
+import { ref,computed, reactive } from 'vue'
+const msg = ref('Hello Vue 3!')
+const counter  = reactive({ count: 0 })
+const increment = ()=>{
+  counter.count++
+}
 const header = ref('Shopping List App')
 const editing = ref(false)
 const items = ref([
@@ -101,5 +105,10 @@ const togglePurchased = (item)=>{
   <p v-if="!items.length">
     Nothing to see here
   </p>
-  
+  <input v-model="msg">
+  <p>{{ msg }}</p>
+  <button @click="increment" class="btn btn-primary">
+    Increment
+  </button>
+  <p>Count: {{ counter.count }}</p>
 </template>
